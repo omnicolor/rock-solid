@@ -1,0 +1,105 @@
+@color1: #ff0000;
+@color2: #00ff00;
+@color3: #0000ff;
+
+@font-face {
+    font-family: 'Monda';
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/monda-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: EnvyCodeR;
+    font-style: normal;
+    font-weight: normal;
+    src: url('fonts/Envy Code R.ttf');
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Monda;
+    font-size: 120%;
+}
+
+section.slide {
+}
+
+.slide pre {
+    border: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.centered {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+}
+
+.pull-left {
+    display: inline-block;
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.deck-current ul.note {
+    display: none;
+}
+
+.highlight {
+    background-color: #F2F5A9;
+    font-size: 100%;
+}
+
+.slide pre.cli {
+    background-color: #000000;
+    bottom: 0;
+    color: #ffffff;
+    font-family: EnvyCodeR;
+    font-size: 100%;
+    left: 0;
+    margin: 0 inherit;
+    padding: 0 2.5em;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+section.slide pre.cli * {
+    font-family: EnvyCodeR;
+    font-size: 100%;
+}
+
+.slide {
+    border-bottom: 2em solid @color1;
+    border-top: 1.5em solid @color3;
+    margin-bottom: -2.1em;
+}
+
+.deck-status,
+.slide::after {
+    bottom: 3px;
+    font-size: 120%;
+    position: fixed;
+    z-index: 9;
+}
+
+.deck-status {
+    right: 1em;
+    z-index: 9;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
+.slide.title::after {
+    content: "";
+}
+
+.slide::after {
+    content: "Title goes here";
+    left: 1em;
+}
