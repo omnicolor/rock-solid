@@ -1,6 +1,7 @@
 @color1: #703a2f;
-@color2: #00ff00;
-@color3: #0000ff;
+@color2: #a9ab4b;
+@color3: #d2d459;
+@color4: #c9d5d6;
 
 @font-face {
     font-family: 'Monda';
@@ -75,8 +76,9 @@ section.slide pre.cli * {
 }
 
 .slide {
+    background-color: @color4;
     border-bottom: 2em solid @color1;
-    border-top: 1.5em solid @color3;
+    border-top: 1.5em solid @color1;
     margin-bottom: -2.1em;
 }
 
@@ -100,6 +102,37 @@ section.slide pre.cli * {
 }
 
 .slide::after {
-    content: "Title goes here";
+    content: "Building Rock Solid Software";
     left: 1em;
+}
+
+.slide.title .container {
+    background-image: url(images/rocks.jpg);
+    background-size: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+}
+
+.slide.title .title-text {
+    font-size: 180%;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 50%;
+}
+
+.title-highlight {
+    color: @color2;
+}
+
+.slide.title .subtitle {
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    width: 50%;
 }
