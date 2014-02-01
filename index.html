@@ -239,6 +239,54 @@
     </ul>
 </section>
 
+<section class="slide">
+    <div>PHPCode_Sniffer</div>
+    <ul class="note">
+        <li>Code sniffer</li>
+        <li>statically analyzes code for "smells" or bad things</li>
+        <li>like missing docblocks</li>
+        <li>bad indentation</li>
+        <li>braces in the wrong place</li>
+        <li>most things in your style guide can be coded as a smell</li>
+        <li>next is &rarr; PHPMD</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div>PHP Mess Detector</div>
+    <ul class="note">
+        <li>&hellip; PHPMD</li>
+        <li>The message detector</li>
+        <li>bad language constructs, like eval and goto</li>
+        <li>unused variables</li>
+        <li>Excessive complexity</li>
+        <li>then there's the &rarr; PHPCPD</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div>PHPCPD</div>
+    <ul class="note">
+        <li>&hellip; PHPCPD</li>
+        <li>copy paste detector</li>
+        <li>finds code blocks that are similar</li>
+        <li>should be refactored so the common code is in one place</li>
+        <li>keeps from having to remember to fix in all places</li>
+        <li>next is the &rarr; PHPDCD</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div>PHPDCD</div>
+    <ul class="note">
+        <li>&hellip; PHPDCD</li>
+        <li>PHP dead code detector</li>
+        <li>find unreachable or uncalled code</li>
+        <li>code after a return or exit</li>
+        <li>code in a conditional that never fires</li>
+    </ul>
+</section>
+
 <!--
 <section class="slide">
     <div></div>
