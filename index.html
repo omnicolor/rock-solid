@@ -252,6 +252,59 @@ PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
 </section>
 
 <section class="slide">
+    <pre class="cli">
+$ phpunit --colors tests
+PHPUnit 3.7.28 by Sebastian Bergmann.
+........................................  63 / 315 ( 20%)
+........................................ 126 / 315 ( 40%)
+........................................ 189 / 315 ( 60%)
+........................................ 252 / 315 ( 80%)
+........................................ 315 / 315 (100%)
+
+Time: 3.36 seconds, Memory: 6.75Mb
+<div class="invert-pass">OK (315 tests, 348 assertions)</div>
+    </pre>
+    <ul class="note">
+        <li>Developers should be very used to seeing screens like this</li>
+        <li>And tests should run very fast so developers have no excuses</li>
+        <li>In this case, 315 tests in over 3 seconds is slow</li>
+        <li>You should work to figure out why tests are slow</li>
+        <li>If you install the &rarr; PHP_Invoker package</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <pre class="cli">
+$ phpunit --strict --colors tests
+PHPUnit 3.7.28 by Sebastian Bergmann.
+.<span class="fail">E</span>......................................  63 / 315 ( 20%)
+........................................ 126 / 315 ( 40%)
+........................................ 189 / 315 ( 60%)
+........................................ 252 / 315 ( 80%)
+........................................ 315 / 315 (100%)
+
+Time: 1.42 seconds, Memory: 7.00Mb
+
+There was 1 error:
+
+1) CharacterTest::testSetArchetype
+PHP_Invoker_TimeoutException: Execution aborted after 1 second
+
+tests/CharacterTest.php:65
+<div class="invert-fail">FAILURES!
+Tests: 315, Assertions: 347, Errors: 1.</div>
+    </pre>
+    <ul class="note">
+        <li>&hellip; PHP_Invoker package</li>
+        <li>You can add the strict flag which fails tests that take too long</li>
+        <li>You can add a medium or large annotation to the test</li>
+        <li>or fix the test to not take so long</li>
+        <li>You can also use the group annotation to split your tests</li>
+        <li>So long-running integration tests are split out</li>
+    </ul>
+</section>
+
+<section class="slide">
     <div class="title">PHPCode_Sniffer</div>
     <a href="http://asafoot.wordpress.com/2012/03/28/hump-day-humor-5/">
         <img alt="Here. Smell deez..." src="images/cat-feet.jpg">
