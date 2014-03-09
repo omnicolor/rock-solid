@@ -360,6 +360,31 @@ Time: 33 ms, Memory: 3.00Mb
         <li>bad language constructs, like eval and goto</li>
         <li>unused variables</li>
         <li>Excessive complexity</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <pre class="cli">
+$ phpmd UnknownElement.php text design,codesize,cleancode
+
+UnknownElement.php:72
+    Avoid using static access to class 'Task' in method
+    'maybeConfigure'.
+UnknownElement.php:92
+    Avoid using static access to class 'BuildException' in
+    method 'main'.
+UnknownElement.php:95
+    Avoid using static access to class 'Task' in method
+    'main'.
+UnknownElement.php:118
+    Avoid using static access to class 'TaskAdapter' in
+    method 'handleChildren'.
+    </pre>
+    <ul class="note">
+        <li>Here's an example of running a few default mess settings</li>
+        <li>on a file from the Phing project</li>
+        <li>Again, it's pretty easy to configure</li>
+        <li>and you can suppress warnings if you disagree with them</li>
         <li>then there's the &rarr; PHPCPD</li>
     </ul>
 </section>
