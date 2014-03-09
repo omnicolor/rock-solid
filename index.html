@@ -441,6 +441,45 @@ Time: 740 ms, Memory: 5.25Mb
 </section>
 
 <section class="slide">
+    <pre class="prettyprint">
+&lt;?php
+if (false) {
+    echo 'This never runs';
+}
+function uncalled() {
+    echo 'Nothing calls this';
+}
+exit(0);
+echo 'More uncalled code';
+    </pre>
+    <ul class="note">
+        <li>Here's an example file with three types of dead code</li>
+        <li>The conditional can't possibly fire</li>
+        <li>There's a defined function that isn't called</li>
+        <li>and there's code called after the exit</li>
+        <li>The dead code detector will only flag the uncalled function</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <pre class="cli">
+$ phpdcd test.php
+phpdcd 1.0.1 by Sebastian Bergmann.
+
+  - uncalled()
+    LOC: 3, declared in test.php:7
+
+Time: 20 ms, Memory: 3.00Mb
+    </pre>
+    <ul class="note">
+        <li>Here's the output if we run PHPDCD on the example</li>
+        <li>It flags that method</li>
+        <li>You will want to exclude your test directory if you run this</li>
+        <li>Since it doesn't handle the reflection magic very well</li>
+    </ul>
+</section>
+
+<section class="slide">
     <div class="title">Code coverage</div>
     <a href="https://filipspagnoli.wordpress.com/category/comedy/political-jokes-and-funny-quotes/page/2/">
         <img alt="OMG!!! Her angles are uncovered" src="images/uncovered.jpg">
