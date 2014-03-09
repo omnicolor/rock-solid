@@ -436,7 +436,6 @@ Time: 740 ms, Memory: 5.25Mb
         <li>PHP dead code detector</li>
         <li>Limited tool, but useful in some cases</li>
         <li>it finds uncalled methods</li>
-        <li>finally, there's &rarr; code coverage</li>
     </ul>
 </section>
 
@@ -476,6 +475,7 @@ Time: 20 ms, Memory: 3.00Mb
         <li>It flags that method</li>
         <li>You will want to exclude your test directory if you run this</li>
         <li>Since it doesn't handle the reflection magic very well</li>
+        <li>finally, there's &rarr; code coverage</li>
     </ul>
 </section>
 
@@ -489,6 +489,21 @@ Time: 20 ms, Memory: 3.00Mb
         <li>not really an automated check</li>
         <li>you may want to run as pre-flight check</li>
         <li>but shouldn't block submission</li>
+        <li>And you should be careful about setting coverage requirements</li>
+        <li>don't cover code just for coverage's sake</li>
+        <li>write good tests</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Code coverage</div>
+    <img alt="Code coverage example" src="images/coverage.png">
+    <ul class="note">
+        <li>Here's an example HTML report</li>
+        <li>You can drill into each file</li>
+        <li>and see what lines are or aren't covered</li>
+        <li>If you're doing TDD this will necessarily be high</li>
+        <li>if you're starting on a legacy codebase it will be very low</li>
         <li>moving on to &rarr; code reviews</li>
     </ul>
 </section>
