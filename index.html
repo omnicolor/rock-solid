@@ -316,6 +316,33 @@ Tests: 315, Assertions: 347, Errors: 1.</div>
         <li>bad indentation</li>
         <li>braces in the wrong place</li>
         <li>most things in your style guide can be coded as a smell</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <pre class="cli">
+$ phpcs skill.php
+
+FILE: skill.php
+----------------------------------------------------------
+FOUND 9 ERROR(S) AND 1 WARNING(S) AFFECTING 4 LINE(S)
+----------------------------------------------------------
+  4 | WARNING | PHP version not specified
+  4 | ERROR   | Missing @category tag in file comment
+  4 | ERROR   | Missing @package tag in file comment
+  4 | ERROR   | Missing @author tag in file comment
+ 50 | ERROR   | Short PHP opening tag used with echo; expected "&lt;?php echo
+    |         | htmlentities ..." but found "&lt;?= htmlentities ..."
+ 52 | ERROR   | Expected "foreach (...) {\n"; found "foreach (...) {"
+ 52 | ERROR   | Closing brace must be on a line by itself
+----------------------------------------------------------
+
+Time: 33 ms, Memory: 3.00Mb
+    </pre>
+    <ul class="note">
+        <li>Here's what PHP code sniffer output might look like</li>
+        <li>It's very configurable and you can write new sniffs</li>
+        <li>We'll talk a bit about style guides more later as well</li>
         <li>next is &rarr; PHPMD</li>
     </ul>
 </section>
