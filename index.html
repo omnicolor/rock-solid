@@ -208,6 +208,31 @@
         <li>PHP lint</li>
         <li>Bare minimum</li>
         <li>Finds syntax errors, or things that might cause a fatal error</li>
+    </ul>
+</section>
+
+<section class="slide lint">
+    <pre class="prettyprint">
+        &lt;?php
+        // test.php
+        echo 'foo'
+        echo 'bar';
+    </pre>
+
+    <pre class="cli">
+
+$ php -l test.php
+Errors parsing test.php
+$ php test.php
+PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in test.php on line 3
+    </pre>
+    <ul class="note">
+        <li>So if you lint the file it will tell you that you've got errors</li>
+        <li>it doesn't tell you much more than that,</li>
+        <li>but it doesn't execute the file</li>
+        <li>so it can be run on destructive scripts</li>
+        <li>It <strong>does</strong> however return a non-zero error code</li>
+        <li>so you can use that to fail a script or a build</li>
         <li>A more rigorous tool for catching problems is &rarr; phpunit</li>
     </ul>
 </section>
