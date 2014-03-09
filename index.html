@@ -400,6 +400,28 @@ UnknownElement.php:118
         <li>finds code blocks that are similar</li>
         <li>should be refactored so the common code is in one place</li>
         <li>keeps from having to remember to fix in all places</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <pre class="cli">
+$ phpcpd .
+phpcpd 2.0.0 by Sebastian Bergmann.
+
+Found 1 exact clones with 20 duplicated lines in 1 files:
+
+  -     tests/CharacterControllerTest.php:262-282
+        tests/CharacterControllerTest.php:312-332
+
+0.55% duplicated lines out of 3651 total lines of code.
+
+Time: 740 ms, Memory: 5.25Mb
+    </pre>
+    <ul class="note">
+        <li>Here's an example of the output</li>
+        <li>It's shows a small amount of code that could be refactored</li>
+        <li>The tool can be configured with how much duplication is required</li>
+        <li>before throwing a warning</li>
         <li>next is the &rarr; PHPDCD</li>
     </ul>
 </section>
