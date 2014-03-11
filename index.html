@@ -767,6 +767,99 @@ Time: 20 ms, Memory: 3.00Mb
         <li>use repository hooks to make sure unit tests pass</li>
         <li>and that the submitted code has been reviewed</li>
         <li>This is your last chance to keep bad code out</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <a href="http://www.edzynda.com/using-hooks-in-wordpress/">
+        <img alt="Fish hooks" src="images/hooks.jpg">
+    </a>
+    <ul class="note">
+        <li>We've talked a lot about running things automatically</li>
+        <li>But I haven't mentioned how to actually do that</li>
+        <li>The easiest and most reliable way is to do it with hooks</li>
+        <li>I'll show an example of how to do it Git</li>
+        <li>Other version control systems will have very similar concepts</li>
+        <li>First, what &rarr; is a hook?</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <a href="http://commons.wikimedia.org/wiki/File:Fish_hook.png">
+        <img alt="Fish hook" src="images/hook.png">
+    </a>
+    <ul class="note">
+        <li>&hellip; is a hook?</li>
+        <li>Simply put, a hook is a script that runs</li>
+        <li>at a certain point in a process</li>
+        <li>It may run right before you submit code</li>
+        <li>or after it gets sent to a server</li>
+        <li>The script can be written in just about any language</li>
+        <li>This is a PHP conference, so I'll use command line PHP</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <a href="http://www.funnyjunk.com/funny_pictures/4109229/Hipster+Knights/152">
+        <img alt="None shall pass" src="images/black-knight.jpg">
+    </a>
+    <ul class="note">
+        <li>We'll start with the Black Knight from Monty Python</li>
+        <li>A gatekeeper that just says "None shall pass"</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <pre class="prettyprint">
+#!/usr/bin/env php
+&lt;?php
+echo 'You FAIL', PHP_EOL;
+exit(1);
+    </pre>
+    <ul class="note">
+        <li>Here's a hook script that will always fail a given step</li>
+        <li>In case anyone is unfamiliar with Unix exit codes</li>
+        <li>Zero means success, Non-zero means an error</li>
+        <li>So you can use different non-zero values for different errors</li>
+        <li>That's not a very useful hook though</li>
+        <li>except as maybe as an April Fool's joke</li>
+        <li>or maybe &rarr; instead of burning</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <a href="http://ecogrrl.net/2012/06/27/workin-9-to-5-turning-the-tables/">
+        <img alt="Remember, if all else fails" src="images/milton.jpg">
+    </a>
+    <ul class="note">
+        <li>&hellip; instead of burning down the building on your way out</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <pre class="cli">
+foo(<span class="dirty">0</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$ touch test
+foo(<span class="dirty">1</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$ git add test
+foo(<span class="dirty">1</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$ git commit
+You FAIL
+foo(<span class="dirty">1</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$
+    </pre>
+    <ul class="note">
+        <li>Here's what you'll see if you add that script to your repo</li>
+        <li>in .git/hooks/pre-commit and make it executable</li>
+        <li>It doesn't even bring up the editor for your commit message</li>
+        <li>But you probably want it to do something useful</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <ul class="note">
         <li>Then it goes to &rarr; continuous build</li>
     </ul>
 </section>
