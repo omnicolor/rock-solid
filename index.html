@@ -425,7 +425,9 @@ Time: 740 ms, Memory: 5.25Mb
     </pre>
     <ul class="note">
         <li>Here's an example of the output</li>
-        <li>It's shows a small amount of code that could be refactored</li>
+        <li>It shows a small amount of code that could be refactored</li>
+        <li>in some unit tests from a personal project.</li>
+        <li>In this case, 20 lines are duplicated</li>
         <li>The tool can be configured with how much duplication is required</li>
         <li>before throwing a warning</li>
         <li>next is the &rarr; PHPDCD</li>
@@ -482,7 +484,8 @@ Time: 20 ms, Memory: 3.00Mb
         <li>Here's the output if we run PHPDCD on the example</li>
         <li>It flags that method</li>
         <li>You will want to exclude your test directory if you run this</li>
-        <li>Since it doesn't handle the reflection magic very well</li>
+        <li>Since it doesn't handle magic very well</li>
+        <li>Magic meaning reflection or calling a function from a variable</li>
         <li>finally, there's &rarr; code coverage</li>
     </ul>
 </section>
@@ -525,8 +528,9 @@ Time: 20 ms, Memory: 3.00Mb
         <li>&hellip; code reviews</li>
         <li>your chance to point out a coworker is doin it rong</li>
         <li>I've used three code review packages</li>
-        <li>the two are free as in speech and beer</li>
-        <li>the first is &rarr; review board</li>
+        <li>and will mention a fourth</li>
+        <li>the first two are free as in speech, beer, or both</li>
+        <li>the first is &rarr; Review Board</li>
     </ul>
 </section>
 
@@ -592,6 +596,8 @@ Time: 20 ms, Memory: 3.00Mb
         <li>&hellip; pre-review</li>
         <li>which stops bad code from getting to production</li>
         <li>but can slow down development</li>
+        <li>Basically code gets committed locally and a review is generated</li>
+        <li>code can't move to the next step in your code repository&hellip;</li>
         <li>there's also &rarr; post-review</li>
     </ul>
 </section>
@@ -603,9 +609,11 @@ Time: 20 ms, Memory: 3.00Mb
     </a>
     <ul class="note">
         <li>&hellip; post-review</li>
-        <li>where the bad code is already committed</li>
+        <li>Where the bad code is already committed</li>
         <li>and can make it into production</li>
-        <li>finally, there's &rarr; a team review with a projector</li>
+        <li>Reviewers then tell the person what they've done wrong</li>
+        <li>and hope that they go back and fix all of the problems</li>
+        <li>Finally, there's &rarr; a team review with a projector</li>
     </ul>
 </section>
 
@@ -671,6 +679,7 @@ Time: 20 ms, Memory: 3.00Mb
     <ul class="note">
         <li>to do reviews right, you need a good style guide</li>
         <li>some people don't have style</li>
+        <li>or they have it, but it's&hellip; uhh&hellip; different</li>
         <li>and &rarr; some do</li>
     </ul>
 </section>
@@ -705,7 +714,7 @@ Time: 20 ms, Memory: 3.00Mb
         <img alt="Trailer home Taj Mahal" src="images/trailer-park-taj-mahal.jpg">
     </a>
     <ul class="note">
-        <li>build your own involves:</li>
+        <li>building your own involves:</li>
         <li>look at your code build guide off that</li>
         <li>don't have to change your code</li>
         <li>More changes to code sniffer to use it, if you even can</li>
@@ -743,12 +752,12 @@ Time: 20 ms, Memory: 3.00Mb
         <li>Documentation</li>
     </ul>
     <ul class="note">
-        <li>&rarr; include in your guide</li>
+        <li>&hellip; include in your guide</li>
         <li>Here's some examples</li>
         <li>Your naming scheme, like underscores vs camelcase</li>
         <li>if you have a soft or hard limit to line length</li>
-        <li>tabs versus spaces</li>
-        <li>whether to allow the elvis operator (ternary)</li>
+        <li>tabs versus spaces, or both</li>
+        <li>whether to allow the Elvis operator (ternary)</li>
         <li>how your code should be documented</li>
         <li>Moving on &rarr; to submitting code</li>
     </ul>
