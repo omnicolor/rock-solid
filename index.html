@@ -916,6 +916,17 @@ if (!$success) {
 </section>
 
 <section class="slide">
+    <div class="title">Submitting code</div>
+    <pre class="cli">
+foo(<span class="dirty">2</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$ git commit
+Errors parsing ./test.php
+Errors parsing ./test/foo.php
+foo(<span class="dirty">2</span><span class="ahead">0</span><span class="behind">0</span>) <span class="directory">/</span>$
+    </pre>
+    <ul class="note">
+        <li>Here's what some example output of that hook will look like</li>
+        <li>Two bad files, one down in a directory</li>
+    </ul>
 </section>
 
 <section class="slide">
