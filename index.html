@@ -868,16 +868,61 @@ foo(<span class="dirty">1</span><span class="ahead">0</span><span class="behind"
 </section>
 
 <section class="slide">
+    <div class="title">Submitting code</div>
+    <pre class="prettyprint">
+#!/usr/bin/env php
+&lt;?php
+$directory = new RecursiveDirectoryIterator(
+    '.', FilesystemIterator::SKIP_DOTS
+);
+$iterator = new RecursiveIteratorIterator($directory);
+$regexIterator = new RegexIterator(
+    $iterator, '/^.+\.php$/i',
+    RecursiveRegexIterator::GET_MATCH
+);</pre>
     <ul class="note">
-        <li>Then it goes to &rarr; continuous build</li>
+        <li>Let's scan all of the project's files</li>
+        <li>and run lint on them.</li>
+        <li>Here we set up the iterators we need</li>
+        <li>These will scan through the entire project</li>
+        <li>Ignoring dot directories</li>
+        <li>And picking out PHP files</li>
     </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Submitting code</div>
+    <pre class="prettyprint">
+$success = true;
+foreach ($regexIterator as $file) {
+    $output = exec('php -l ' . escapeshellarg($file[0]),
+        $unused, $return);
+    if ($return) {
+        echo $output, PHP_EOL;
+        $success = false;
+    }
+}
+if (!$success) {
+    exit(1);
+}</pre>
+    <ul class="note">
+        <li>Here we run php lint on each of those files</li>
+        <li>and display the output if the exit code is non-zero</li>
+        <li>If any of the linted files had an error, we fail the script</li>
+        <li>Don't let this simple example&hellip;</li>
+        <li>I have some more complicated SVN hooks on my blog</li>
+        <li>and do an entire talk on the awesomeness of git hooks</li>
+    </ul>
+</section>
+
+<section class="slide">
 </section>
 
 <section class="slide">
     <div class="title">After submitting</div>
     <img alt="Continuous build map" src="images/build-server.png">
     <ul class="note">
-        <li>&hellip; continuous build, which</li>
+        <li>Finally, code makes it to continuous build, which</li>
         <li>builds documentation</li>
         <li>runs unit tests</li>
         <li>calculates code coverage</li>
@@ -911,6 +956,8 @@ foo(<span class="dirty">1</span><span class="ahead">0</span><span class="behind"
         <li>&rarr; to make it very visible</li>
         <li>This is a build orb that glows green or red</li>
         <li>giving a visual indication of the build's health</li>
+        <li>Traffic lights</li>
+        <li>If management comes running and interrupts, turn it off</li>
     </ul>
 </section>
 
