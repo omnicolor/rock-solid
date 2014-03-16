@@ -276,7 +276,7 @@ Time: 3.36 seconds, Memory: 6.75Mb
 
 <section class="slide">
     <div class="title">Automated checks: phpunit</div>
-    <pre class="cli">
+    <pre class="cli smaller">
 $ phpunit --strict --colors tests
 PHPUnit 3.7.28 by Sebastian Bergmann.
 .<span class="fail">E</span>......................................  63 / 315 ( 20%)
@@ -323,7 +323,7 @@ Tests: 315, Assertions: 347, Errors: 1.</div>
 
 <section class="slide">
     <div class="title">Automated checks: PHPCode_Sniffer</div>
-    <pre class="cli">
+    <pre class="cli smaller">
 $ phpcs skill.php
 
 FILE: skill.php
@@ -889,7 +889,7 @@ $regexIterator = new RegexIterator(
 
 <section class="slide">
     <div class="title">Submitting code</div>
-    <pre class="prettyprint">
+    <pre class="prettyprint smaller">
 $success = true;
 foreach ($regexIterator as $file) {
     $output = exec('php -l ' . escapeshellarg($file[0]),
