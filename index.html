@@ -250,7 +250,7 @@ PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
         <li>&hellip; PHPUnit</li>
         <li>the de facto standard for unit testing</li>
         <li>You could probably use simple test if you wanted</li>
-        <li>Many talks about PHPunit at this conf and others</li>
+        <li>There are already so many talks about PHPUnit</li>
         <li>so I'll gloss over testing</li>
         <li>lint and PHPunit should run pre-commit and on CI server</li>
         <li>everything else we talk about should be available to devs</li>
@@ -261,8 +261,8 @@ PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
 <section class="slide">
     <div class="title">Automated checks: phpunit</div>
     <pre class="cli">
-$ phpunit --colors tests
-PHPUnit 3.7.28 by Sebastian Bergmann.
+$ phpunit
+PHPUnit 4.2.6 by Sebastian Bergmann.
 ........................................  63 / 315 ( 20%)
 ........................................ 126 / 315 ( 40%)
 ........................................ 189 / 315 ( 60%)
@@ -284,8 +284,8 @@ Time: 3.36 seconds, Memory: 6.75Mb
 <section class="slide">
     <div class="title">Automated checks: phpunit</div>
     <pre class="cli">
-$ phpunit --strict --colors tests
-PHPUnit 3.7.28 by Sebastian Bergmann.
+$ phpunit --enforce-time-limit
+PHPUnit 4.2.6 by Sebastian Bergmann.
 .<span class="fail">E</span>......................................  63 / 315 ( 20%)
 ........................................ 126 / 315 ( 40%)
 ........................................ 189 / 315 ( 60%)
@@ -305,7 +305,8 @@ Tests: 315, Assertions: 347, Errors: 1.</div>
     </pre>
     <ul class="note">
         <li>&hellip; PHP_Invoker package</li>
-        <li>You can add the strict flag which fails tests that take too long</li>
+        <li>You can add a flag or configuration option</li>
+        <li>which fails tests that take too long</li>
         <li>You can add a medium or large annotation to the test</li>
         <li>or fix the test to not take so long</li>
         <li>You can also use the group annotation to split your tests</li>
