@@ -285,7 +285,7 @@ Time: 3.36 seconds, Memory: 6.75Mb
     <div class="title">Automated checks: phpunit</div>
     <pre class="cli">
 $ phpunit --enforce-time-limit
-PHPUnit 4.2.6 by Sebastian Bergmann.
+PHPUnit 4.5.0 by Sebastian Bergmann.
 .<span class="fail">E</span>......................................  63 / 315 ( 20%)
 ........................................ 126 / 315 ( 40%)
 ........................................ 189 / 315 ( 60%)
@@ -311,6 +311,83 @@ Tests: 315, Assertions: 347, Errors: 1.</div>
         <li>or fix the test to not take so long</li>
         <li>You can also use the group annotation to split your tests</li>
         <li>So long-running integration tests are split out</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="prettyprint">
+class Foo {
+    public function bar() {
+        return true;
+    }
+}
+
+class FooTest extends PHPUnit_Framework_TestCase {
+    public function testBar() {
+        (new Foo())-&gt;bar();
+    }
+}</pre>
+    <ul class="note">
+        <li>There are also tests that don't test anything</li>
+        <li>Here's a really simple example</li>
+        <li>The test will show 100% code coverage</li>
+        <li>Since it does actually run the bar method</li>
+        <li>But it obviously doesn't test anything</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit --coverage-text test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+.
+
+Time: 104 ms, Memory: 7.75Mb
+OK (1 test, 0 assertions)
+
+Code Coverage Report:
+  2015-03-06 10:14:31
+
+ Summary:
+  Classes: 100.00% (1/1)
+  Methods: 100.00% (1/1)
+  Lines:   100.00% (1/1)
+
+Foo
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)</pre>
+    <ul class="note">
+        <li>Here's what that looks like when you run code coverage</li>
+        <li>100% coverage</li>
+        <li>So we're done, right?</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit --report-useless-tests --coverage-text test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+R
+
+Time: 106 ms, Memory: 7.75Mb
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 1, Assertions: 0, Risky: 1.
+
+Code Coverage Report:
+  2015-03-06 10:20:03
+
+ Summary:
+  Classes:  0.00% (0/1)
+  Methods:  0.00% (0/1)
+  Lines:    0.00% (0/1)</pre>
+    <ul class="note">
+        <li>Well, not really</li>
+        <li>Here's what the same thing looks like</li>
+        <li>reporting useless tests</li>
+        <li>The test is marked with an R for risky</li>
+        <li>And code coverage is zero</li>
+        <li>I find this to be an awesome flag to add</li>
     </ul>
 </section>
 
