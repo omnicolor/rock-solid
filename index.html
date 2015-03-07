@@ -388,7 +388,69 @@ Code Coverage Report:
         <li>reporting useless tests</li>
         <li>The test is marked with an R for risky</li>
         <li>And code coverage is zero</li>
-        <li>I find this to be an awesome flag to add</li>
+        <li>I find this to be an awesome flag to add for more rigor in testing</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="prettyprint">class Foo {
+    function bar() {
+        echo 'FFF';
+        return true;
+    }
+}
+
+class FooTest extends PHPUnit_Framework_TestCase {
+    public function testBar() {
+        $foo = new Foo();
+        $this-&gt;assertTrue($foo-&gt;bar());
+    }
+}</pre>
+    <ul class="note">
+        <li>Another problem with unit tests is code that produces output</li>
+        <li>You can argue about whether it's a problem or not</li>
+        <li>I think the output should be tested explicitly</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+
+.FFF
+
+Time: 76 ms, Memory: 3.25Mb
+
+OK (1 test, 1 assertion)</pre>
+    <ul class="note">
+        <li>If you run this test, you get this</li>
+        <li>When run in a very large test suite</li>
+        <li>it can be difficult to figure out which test is causing the output</li>
+        <li>Adding the disallow-test-output flag marks the test as risky</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit --disallow-test-output --verbose test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+
+RFFF
+
+Time: 47 ms, Memory: 3.25Mb
+
+There was 1 risky test:
+
+1) FooTest::testBar
+This test printed output: Moo
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 1, Assertions: 1, Risky: 1.</pre>
+    <ul class="note">
+        <li>You can see the test still passes</li>
+        <li>But it is marked as risky</li>
     </ul>
 </section>
 
