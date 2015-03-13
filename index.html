@@ -42,7 +42,7 @@
         <a href="http://twitter.com/omnicolor">@omnicolor</a><br>
         Mashery<br>
         <a href="http://omni-spot.blogspot.com">http://omni-spot.blogspot.com</a><br>
-        <a href="https://joind.in/10548">https://joind.in/10548</a>
+        <a href="https://joind.in/dallasphp-201503">https://joind.in/dallasphp-201503</a>
     </div>
 </section>
 
@@ -248,8 +248,9 @@ PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
         <li>&hellip; PHPUnit</li>
         <li>the de facto standard for unit testing</li>
         <li>You could probably use simple test if you wanted</li>
-        <li>Many talks about PHPunit at this conf and others</li>
+        <li>There are already so many talks about PHPUnit</li>
         <li>so I'll gloss over testing</li>
+        <li>But I will talk about ways to test better</li>
         <li>lint and PHPunit should run pre-commit and on CI server</li>
         <li>everything else we talk about should be available to devs</li>
         <li>and run in CI for reporting</li>
@@ -259,8 +260,8 @@ PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';'
 <section class="slide">
     <div class="title">Automated checks: phpunit</div>
     <pre class="cli">
-$ phpunit --colors tests
-PHPUnit 3.7.28 by Sebastian Bergmann.
+$ phpunit
+PHPUnit 4.2.6 by Sebastian Bergmann.
 ........................................  63 / 315 ( 20%)
 ........................................ 126 / 315 ( 40%)
 ........................................ 189 / 315 ( 60%)
@@ -281,9 +282,8 @@ Time: 3.36 seconds, Memory: 6.75Mb
 
 <section class="slide">
     <div class="title">Automated checks: phpunit</div>
-    <pre class="cli smaller">
-$ phpunit --strict --colors tests
-PHPUnit 3.7.28 by Sebastian Bergmann.
+    <pre class="cli smaller">$ phpunit --enforce-time-limit
+PHPUnit 4.5.0 by Sebastian Bergmann.
 .<span class="fail">E</span>......................................  63 / 315 ( 20%)
 ........................................ 126 / 315 ( 40%)
 ........................................ 189 / 315 ( 60%)
@@ -303,11 +303,151 @@ Tests: 315, Assertions: 347, Errors: 1.</div>
     </pre>
     <ul class="note">
         <li>&hellip; PHP_Invoker package</li>
-        <li>You can add the strict flag which fails tests that take too long</li>
+        <li>You can add a flag or configuration option</li>
+        <li>which fails tests that take too long</li>
         <li>You can add a medium or large annotation to the test</li>
         <li>or fix the test to not take so long</li>
         <li>You can also use the group annotation to split your tests</li>
         <li>So long-running integration tests are split out</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="prettyprint">
+class Foo {
+    public function bar() {
+        return true;
+    }
+}
+
+class FooTest extends PHPUnit_Framework_TestCase {
+    public function testBar() {
+        (new Foo())-&gt;bar();
+    }
+}</pre>
+    <ul class="note">
+        <li>There are also tests that don't test anything</li>
+        <li>Here's a really simple example</li>
+        <li>The test will show 100% code coverage</li>
+        <li>Since it does actually run the bar method</li>
+        <li>But it obviously doesn't test anything</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli smaller">$ phpunit --coverage-text test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+.
+
+Time: 104 ms, Memory: 7.75Mb
+OK (1 test, 0 assertions)
+
+Code Coverage Report:
+  2015-03-06 10:14:31
+
+ Summary:
+  Classes: 100.00% (1/1)
+  Methods: 100.00% (1/1)
+  Lines:   100.00% (1/1)
+
+Foo
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)</pre>
+    <ul class="note">
+        <li>Here's what that looks like when you run code coverage</li>
+        <li>100% coverage</li>
+        <li>So we're done, right?</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit --report-useless-tests --coverage-text test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+R
+
+Time: 106 ms, Memory: 7.75Mb
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 1, Assertions: 0, Risky: 1.
+
+Code Coverage Report:
+  2015-03-06 10:20:03
+
+ Summary:
+  Classes:  0.00% (0/1)
+  Methods:  0.00% (0/1)
+  Lines:    0.00% (0/1)</pre>
+    <ul class="note">
+        <li>Well, not really</li>
+        <li>Here's what the same thing looks like</li>
+        <li>reporting useless tests</li>
+        <li>The test is marked with an R for risky</li>
+        <li>And code coverage is zero</li>
+        <li>I find this to be an awesome flag to add for more rigor in testing</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="prettyprint smaller">class Foo {
+    function bar() {
+        echo 'FFF';
+        return true;
+    }
+}
+
+class FooTest extends PHPUnit_Framework_TestCase {
+    public function testBar() {
+        $foo = new Foo();
+        $this-&gt;assertTrue($foo-&gt;bar());
+    }
+}</pre>
+    <ul class="note">
+        <li>Another problem with unit tests is code that produces output</li>
+        <li>You can argue about whether it's a problem or not</li>
+        <li>I think the output should be tested explicitly</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+
+.FFF
+
+Time: 76 ms, Memory: 3.25Mb
+
+OK (1 test, 1 assertion)</pre>
+    <ul class="note">
+        <li>If you run this test, you get this</li>
+        <li>When run in a very large test suite</li>
+        <li>it can be difficult to figure out which test is causing the output</li>
+        <li>Adding the disallow-test-output flag marks the test as risky</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <div class="title">Automated checks: phpunit</div>
+    <pre class="cli">$ phpunit --disallow-test-output --verbose test.php
+PHPUnit 4.5.0 by Sebastian Bergmann and contributors.
+
+RFFF
+
+Time: 47 ms, Memory: 3.25Mb
+
+There was 1 risky test:
+
+1) FooTest::testBar
+This test printed output: Moo
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 1, Assertions: 1, Risky: 1.</pre>
+    <ul class="note">
+        <li>You can see the test still passes</li>
+        <li>But it is marked as risky</li>
     </ul>
 </section>
 
@@ -349,7 +489,10 @@ Time: 33 ms, Memory: 3.00Mb
     </pre>
     <ul class="note">
         <li>Here's what PHP code sniffer output might look like</li>
-        <li>It's very configurable and you can write new sniffs</li>
+        <li>When run on code following PSR-2 with the PEAR sniff suite</li>
+        <li>You can see that it's complaining about a bunch of missing stuff</li>
+        <li>as well as some issues with the code style</li>
+        <li>Code sniffer is very configurable and you can write new sniffs</li>
         <li>We'll talk a bit about style guides more later as well</li>
         <li>next is &rarr; PHPMD</li>
     </ul>
@@ -390,6 +533,8 @@ UnknownElement.php:118
     <ul class="note">
         <li>Here's an example of running it with a few default settings</li>
         <li>on a file from the Phing project</li>
+        <li>It's complaining about the code having static cling</li>
+        <li>Which is usually not a good idea</li>
         <li>Again, it's pretty easy to configure</li>
         <li>and you can suppress warnings if you disagree with them</li>
         <li>then there's the &rarr; PHPCPD</li>
@@ -406,7 +551,9 @@ UnknownElement.php:118
         <li>copy paste detector</li>
         <li>finds code blocks that are similar</li>
         <li>should be refactored so the common code is in one place</li>
-        <li>keeps from having to remember to fix in all places</li>
+        <li>which keeps from having to remember to fix in all places</li>
+        <li>If you find a bug in code that is duplicated all over</li>
+        <li>you <strong>will</strong> miss one place when fixing it, guaranteed!</li>
     </ul>
 </section>
 
@@ -429,7 +576,8 @@ Time: 740 ms, Memory: 5.25Mb
         <li>Here's an example of the output</li>
         <li>It shows a small amount of code that could be refactored</li>
         <li>in some unit tests from a personal project.</li>
-        <li>In this case, 20 lines are duplicated</li>
+        <li>I don't mind small amounts of duplication in unit tests</li>
+        <li>But in this case, 20 lines are duplicated which is a bit much</li>
         <li>The tool can be configured with how much duplication is required</li>
         <li>before throwing a warning</li>
         <li>next is the &rarr; PHPDCD</li>
@@ -464,10 +612,11 @@ echo 'More uncalled code';
     </pre>
     <ul class="note">
         <li>Here's an example file with three types of dead code</li>
-        <li>The conditional can't possibly fire</li>
+        <li>The conditional can't possibly fire since it's always false</li>
         <li>There's a defined function that isn't called</li>
         <li>and there's code called after the exit</li>
         <li>The dead code detector will only flag the uncalled function</li>
+        <li>Again, it's not perfect, but can help</li>
     </ul>
 </section>
 
@@ -981,7 +1130,7 @@ foo(<span class="dirty">2</span><span class="ahead">0</span><span class="behind"
         <a href="http://twitter.com/omnicolor">@omnicolor</a><br>
         Mashery<br>
         <a href="http://omni-spot.blogspot.com">http://omni-spot.blogspot.com</a><br>
-        <a href="https://joind.in/10548">https://joind.in/10548</a>
+        <a href="https://joind.in/dallasphp-201503">https://joind.in/dallasphp-201503</a>
     </div>
     <ul class="note">
         <li>any questions?</li>
